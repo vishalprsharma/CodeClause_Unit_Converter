@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Converter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+</html>
+<body>
+  <h1>Unit Converter</h1>
+  
+  <div class="converter">
+    <input type="number" id="inputValue" class="input-field" />
+    
+    <select id="inputUnit" class="input-field">
+      <option value="meters">Meters</option>
+      <option value="feet">Feet</option>
+      <option value="inches">Inches</option>
+      <option value="centimeters">Centimeters</option>
+    </select>
+    
+    <button onclick="convert()" class="btn-convert">Convert</button>
+    
+    <select id="outputUnit" class="input-field">
+      <option value="meters">Meters</option>
+      <option value="feet">Feet</option>
+      <option value="inches">Inches</option>
+      <option value="centimeters">Centimeters</option>
+    </select>
+  </div>
+  
+  <div id="result" class="converter"></div>
+  
+  <script>
+    function convert() {
+      var inputValue = parseFloat(document.getElementById("inputValue").value);
+      var inputUnit = document.getElementById("inputUnit").value;
+      var outputUnit = document.getElementById("outputUnit").value;
+      
+      var conversionRates = {
+        meters: {
+          feet: 3.28084,
+          inches: 39.3701,
+          centimeters: 100
+        },
+        feet: {
+          meters: 0.3048,
+          inches: 12,
+          centimeters: 30.48
+        },
+        inches: {
+          meters: 0.0254,
+          feet: 0.0833333,
+          centimeters: 2.54
+        },
+        centimeters: {
+          meters: 0.01,
+          feet: 0.0328084,
+          inches: 0.393701
+        }
+      };
+      
+      var result = inputValue * conversionRates[inputUnit][outputUnit];
+      
+      document.getElementById("result").innerHTML = inputValue + " " + inputUnit + " is equal to " + result + " " + outputUnit;
+    }
+  </script>
+</body>
+</html>
